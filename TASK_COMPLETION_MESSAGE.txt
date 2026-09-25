@@ -1,0 +1,91 @@
+================================================================================
+OASIS INFOBYTE — STUDENT INTERNSHIP PROGRAM (SIP)
+TASK COMPLETION REPORT & SUBMISSION MESSAGE
+================================================================================
+
+INTERN DETAILS:
+---------------
+• Intern Name: Rajesh
+• Domain Track: Data Analytics
+• Assigned Repository: OIBSIP (rajeshrys/OIBSIP-)
+• Cohort: 2026
+
+TASK DETAILS:
+-------------
+• Level Completed: LEVEL 1
+• Task Completed: TASK 1 — EDA on Retail Sales Data
+• Folder Name in Repo: DataAnalytics-L1-EDARetailSales/
+• GitHub Repository Link: https://github.com/rajeshrys/OIBSIP-.git
+• Project Link: https://github.com/rajeshrys/OIBSIP-/tree/main/DataAnalytics-L1-EDARetailSales
+
+SUMMARY OF WORK COMPLETED:
+--------------------------
+1. Data Ingestion & Quality Audit:
+   - Evaluated 2,500 retail transactions spanning 24 months (2023 - 2024).
+   - Zero missing or null values across 18 transactional and demographic attributes.
+
+2. Statistical Analysis:
+   - Computed central tendency and dispersion metrics: Mean, Median, Mode, Standard Deviation, IQR, Min, and Max across continuous variables.
+   - Identified right-skewed revenue distribution driven by high-ticket electronics purchases.
+
+3. Time Series Trends:
+   - Monthly and quarterly revenue vs. profit tracking.
+   - Identified annual Q4 holiday sales surges (Nov-Dec) generating ~38% higher revenue than mid-year baseline.
+
+4. Customer Demographics:
+   - Analyzed age distribution (mean: 37.9 years, median: 38 years).
+   - Identified that the 25–50 age group contributes over 65% of aggregate sales volume with balanced gender distribution (~51% Female, ~46% Male).
+
+5. Departmental & Product Performance:
+   - Evaluated revenue across 5 categories and top 10 best-selling SKUs.
+   - Electronics emerged as the primary revenue driver, while Clothing and Home & Kitchen provided consistent recurring profit.
+
+6. Non-Obvious Insight Discovery:
+   - Discount Margin Dilution Analysis: Proved that promotional discounts beyond 10% erode average net profit per transaction by 27.8% without expanding customer basket quantity.
+
+7. Actionable Business Recommendations:
+   - Formulated 4 quantified business strategies: conditional basket threshold discounting, weekend/Q4 marketing spend allocation, targeted lifestyle bundling, and digital checkout financing.
+
+DELIVERABLE FILES INCLUDED:
+---------------------------
+• EDA_Retail_Sales.ipynb         -> Fully executed Jupyter Notebook with all outputs and charts
+• eda_retail_sales.py           -> Standalone Python analytics execution pipeline
+• generate_dataset.py           -> Dataset creation script
+• data/retail_sales_dataset.csv -> 2,500 retail sales transactions
+• data/descriptive_statistics.csv -> Summary metrics table
+• visualizations/               -> 6 high-resolution exported charts (.png)
+• README.md                     -> Comprehensive project documentation
+
+--------------------------------------------------------------------------------
+LINKEDIN POST SUBMISSION MESSAGE (Copy & Paste for Step 5):
+--------------------------------------------------------------------------------
+
+🚀 Excited to announce that I have successfully completed Task 1 of my Data Analytics Internship at Oasis Infobyte!
+
+📌 Project Details:
+• Track: Data Analytics
+• Level: Level 1 — Task 1
+• Project: Exploratory Data Analysis (EDA) on Retail Sales Data
+• Tech Stack: Python, Pandas, Matplotlib, Seaborn, Jupyter Notebook
+
+🔍 Key Analytical Discoveries:
+1. Conducted descriptive statistical profiling (Mean, Median, Mode, IQR) and data integrity checks across 2,500 retail transactions.
+2. Uncovered strong Q4 seasonality spikes in revenue (~38% above mid-year baseline) and stable quarterly operating margins.
+3. Identified core demographic drivers: customers aged 25 to 50 generate over 65% of total sales with near-equal gender participation.
+4. Highlighted the "Discount Margin Dilemma": blanket discounts >10% erode operating profit margins by ~28% without increasing basket units per order.
+5. Delivered 4 actionable business recommendations on conditional threshold discounts, holiday budget allocation, and digital checkout financing.
+
+📂 GitHub Repository:
+https://github.com/rajeshrys/OIBSIP-
+
+Thank you Oasis Infobyte for this hands-on learning opportunity!
+
+#oasisinfobyte #dataanalytics #datascience #python #eda #internship #businessintelligence
+
+--------------------------------------------------------------------------------
+DEMO VIDEO TITLE CARD SPECIFICATION (First 2 Seconds Requirement):
+--------------------------------------------------------------------------------
+Full Name: Rajesh
+Assigned Track: Data Analytics
+Task Title: Level 1 - Task 1: EDA on Retail Sales Data
+================================================================================

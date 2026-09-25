@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Sales Analytics Dashboard | Oasis Infobyte SIP</title>
+    <meta name="description" content="Interactive Executive EDA Dashboard on Retail Sales Data by Rajesh for Oasis Infobyte SIP Task 1.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon"><i class="fa-solid fa-chart-simple"></i></div>
+                <div class="brand-text">
+                    <h2>OIBSIP Analytics</h2>
+                    <span>Data Analyst Track</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#overview" class="nav-item active"><i class="fa-solid fa-house"></i> Overview</a>
+                <a href="#trends" class="nav-item"><i class="fa-solid fa-arrow-trend-up"></i> Sales Trends</a>
+                <a href="#categories" class="nav-item"><i class="fa-solid fa-layer-group"></i> Categories</a>
+                <a href="#demographics" class="nav-item"><i class="fa-solid fa-users"></i> Demographics</a>
+                <a href="#insights" class="nav-item"><i class="fa-solid fa-lightbulb"></i> Non-Obvious Insight</a>
+                <a href="#transactions" class="nav-item"><i class="fa-solid fa-table-list"></i> Data Explorer</a>
+                <a href="#recommendations" class="nav-item"><i class="fa-solid fa-bullseye"></i> Recommendations</a>
+            </nav>
+
+            <div class="intern-badge">
+                <div class="intern-avatar">R</div>
+                <div class="intern-info">
+                    <h4>Rajesh</h4>
+                    <p>Oasis Infobyte Intern</p>
+                </div>
+                <a href="https://github.com/rajeshrys/OIBSIP-" target="_blank" class="github-link" title="GitHub Repository">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header" id="overview">
+                <div class="header-title">
+                    <h1>Executive Retail Sales Analytics</h1>
+                    <p>Level 1 · Task 1: Exploratory Data Analysis & Strategic Business Intelligence</p>
+                </div>
+                <div class="header-actions">
+                    <span class="badge live-badge"><span class="pulse"></span> 2,500 Transactions</span>
+                    <a href="https://github.com/rajeshrys/OIBSIP-" target="_blank" class="btn btn-secondary">
+                        <i class="fa-brands fa-github"></i> GitHub Repo
+                    </a>
+                </div>
+            </header>
+
+            <!-- Interactive Filter Bar -->
+            <section class="filters-card">
+                <div class="filters-header">
+                    <i class="fa-solid fa-filter"></i>
+                    <span>Dynamic Analytics Filters</span>
+                </div>
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label for="filterCategory">Product Category</label>
+                        <select id="filterCategory">
+                            {% for cat in categories %}
+                            <option value="{{ cat }}">{{ cat }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filterGender">Customer Gender</label>
+                        <select id="filterGender">
+                            {% for gen in genders %}
+                            <option value="{{ gen }}">{{ gen }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filterAgeGroup">Age Cohort</label>
+                        <select id="filterAgeGroup">
+                            {% for age in age_groups %}
+                            <option value="{{ age }}">{{ age }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filterYear">Fiscal Year</label>
+                        <select id="filterYear">
+                            {% for yr in years %}
+                            <option value="{{ yr }}">{{ "All Years" if yr == 0 else yr }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button id="resetFiltersBtn" class="btn btn-outline" title="Reset all filters">
+                            <i class="fa-solid fa-rotate-left"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KPI Metric Cards Grid -->
+            <section class="kpi-grid">
+                <div class="kpi-card accent-blue">
+                    <div class="kpi-icon"><i class="fa-solid fa-wallet"></i></div>
+                    <div class="kpi-details">
+                        <span class="kpi-label">Total Net Revenue</span>
+                        <h2 id="kpiRevenue">$0</h2>
+                        <span class="kpi-subtext"><i class="fa-solid fa-arrow-trend-up text-success"></i> 24-Month Aggregated</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card accent-emerald">
+                    <div class="kpi-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="kpi-details">
+                        <span class="kpi-label">Operating Profit</span>
+                        <h2 id="kpiProfit">$0</h2>
+                        <span class="kpi-subtext" id="kpiMargin">Avg Margin: 0.0%</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card accent-purple">
+                    <div class="kpi-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                    <div class="kpi-details">
+                        <span class="kpi-label">Completed Orders</span>
+                        <h2 id="kpiOrders">0</h2>
+                        <span class="kpi-subtext" id="kpiUnits">Units Sold: 0</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card accent-amber">
+                    <div class="kpi-icon"><i class="fa-solid fa-basket-shopping"></i></div>
+                    <div class="kpi-details">
+                        <span class="kpi-label">Average Order Value (AOV)</span>
+                        <h2 id="kpiAOV">$0.00</h2>
+                        <span class="kpi-subtext" id="kpiDiscount">Avg Discount: 0.0%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sales Trends Section -->
+            <section class="charts-section" id="trends">
+                <div class="section-title">
+                    <i class="fa-solid fa-chart-area"></i>
+                    <h2>Time Series Analysis & Revenue Trends</h2>
+                </div>
+                <div class="charts-grid two-columns">
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h3>Monthly Net Revenue & Order Volume</h3>
+                            <span class="badge info-badge">Monthly Run Rate</span>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="monthlyTrendChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h3>Quarterly Revenue vs. Operating Profit</h3>
+                            <span class="badge info-badge">Q1 2023 – Q4 2024</span>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="quarterlyTrendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Category & Demographic Section -->
+            <section class="charts-section" id="categories">
+                <div class="section-title">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    <h2>Category Performance & Customer Demographics</h2>
+                </div>
+                <div class="charts-grid two-columns">
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h3>Departmental Revenue & Profit Contribution</h3>
+                            <span class="badge info-badge">By Product Category</span>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card" id="demographics">
+                        <div class="chart-card-header">
+                            <h3>Customer Age Cohort Revenue Share</h3>
+                            <span class="badge info-badge">Demographic Segmentation</span>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="ageGroupChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Top Products & Gender Breakdown -->
+            <section class="charts-section">
+                <div class="charts-grid two-columns">
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h3>Top 10 Best-Selling SKUs by Revenue</h3>
+                            <span class="badge info-badge">Highest Grossing Items</span>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="topProductsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h3>Transaction Volume by Customer Gender</h3>
+                            <span class="badge info-badge">Purchasing Parity</span>
+                        </div>
+                        <div class="chart-body doughnut-container">
+                            <canvas id="genderChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Non-Obvious Insight Discovery -->
+            <section class="insight-banner" id="insights">
+                <div class="insight-header">
+                    <div class="insight-tag"><i class="fa-solid fa-atom"></i> Non-Obvious Analytical Discovery</div>
+                    <h2>The Discount Elasticity Trap: Margin Cannibalization Beyond 10%</h2>
+                    <p>Quantitative analysis shows that increasing promotional discounts from 10% to 20% slashes net profit per order by <strong>27.8%</strong>, while failing to expand basket unit volume (remaining flat at ~1.7 units).</p>
+                </div>
+                <div class="insight-content">
+                    <div class="insight-chart-box">
+                        <canvas id="discountInsightChart"></canvas>
+                    </div>
+                    <div class="insight-takeaways">
+                        <div class="takeaway-card">
+                            <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+                            <div>
+                                <h4>Zero Volume Elasticity</h4>
+                                <p>Customers receiving 20% discounts purchase the exact same basket volume (1.71 units) as shoppers paying full price (1.73 units).</p>
+                            </div>
+                        </div>
+                        <div class="takeaway-card">
+                            <i class="fa-solid fa-coins text-warning"></i>
+                            <div>
+                                <h4>Profit Drop from $62.50 to $45.10</h4>
+                                <p>Retail margins erode precipitously when promotional discounts exceed 10% without conditional cart requirements.</p>
+                            </div>
+                        </div>
+                        <div class="takeaway-card">
+                            <i class="fa-solid fa-shield-halved text-success"></i>
+                            <div>
+                                <h4>Strategic Solution</h4>
+                                <p>Cap blanket markdowns at 10% and shift higher discounts exclusively to minimum spend thresholds ($150+).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Transaction Explorer -->
+            <section class="table-section" id="transactions">
+                <div class="section-title">
+                    <i class="fa-solid fa-database"></i>
+                    <h2>Interactive Transaction Explorer</h2>
+                    <span class="table-subtitle">Live inspection of recent sales transactions</span>
+                </div>
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table class="data-table" id="transactionsTable">
+                            <thead>
+                                <tr>
+                                    <th>Txn ID</th>
+                                    <th>Date</th>
+                                    <th>Customer</th>
+                                    <th>Demographics</th>
+                                    <th>Category & Product</th>
+                                    <th>Qty</th>
+                                    <th>Unit Price</th>
+                                    <th>Discount</th>
+                                    <th>Net Revenue</th>
+                                    <th>Profit</th>
+                                    <th>Payment</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <tr>
+                                    <td colspan="11" class="text-center py-4">Loading transaction records...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Strategic Business Recommendations -->
+            <section class="recommendations-section" id="recommendations">
+                <div class="section-title">
+                    <i class="fa-solid fa-compass"></i>
+                    <h2>Actionable Business Recommendations</h2>
+                    <span class="table-subtitle">Evidence-based growth initiatives for retail executives</span>
+                </div>
+                <div class="recommendations-grid">
+                    <div class="rec-card">
+                        <div class="rec-number">01</div>
+                        <h3>Transition to Conditional Basket Bundles</h3>
+                        <p>Eliminate blanket 15–20% sitewide discounts. Replace them with <em>"Spend $150, Get $15 Off"</em> or <em>"Buy 2, Get 1 at 30% Off"</em> to protect the 32.6% gross margin and actively stimulate basket size.</p>
+                    </div>
+
+                    <div class="rec-card">
+                        <div class="rec-number">02</div>
+                        <h3>Capitalize on Q4 & Weekend Peaks</h3>
+                        <p>Q4 generates over 38% above median monthly run-rates, and weekends drive 32% of weekly sales. Concentrate 60% of digital ad spend Thursday–Sunday and prepare holiday stock by mid-October.</p>
+                    </div>
+
+                    <div class="rec-card">
+                        <div class="rec-number">03</div>
+                        <h3>Target High-LTV 25–50 Demographic</h3>
+                        <p>Shoppers aged 25 to 50 generate 65%+ of aggregate gross revenue with balanced participation across genders. Design premium lifestyle bundles (Electronics + Home & Kitchen) for this cohort.</p>
+                    </div>
+
+                    <div class="rec-card">
+                        <div class="rec-number">04</div>
+                        <h3>Expand 0% Digital EMI Financing</h3>
+                        <p>With Credit Card and UPI payments driving 68.2% of transactions, integrating instant 0% EMI financing at checkout will directly accelerate conversions on high-ticket items like Smart TVs.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="dashboard-footer">
+                <div class="footer-left">
+                    <p><strong>OASIS INFOBYTE SIP — Student Internship Program</strong></p>
+                    <p>Data Analytics Track · Level 1 Task 1: EDA on Retail Sales Data</p>
+                </div>
+                <div class="footer-right">
+                    <span>Developer: <strong>Rajesh</strong></span>
+                    <a href="https://github.com/rajeshrys/OIBSIP-" target="_blank" class="footer-btn">
+                        <i class="fa-brands fa-github"></i> Repository
+                    </a>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Dashboard App Logic -->
+    <script src="/static/app.js"></script>
+</body>
+</html>

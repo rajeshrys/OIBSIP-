@@ -1,0 +1,12 @@
+Column,Raw_Dtype,Null_Count,Null_Percentage,Unique_Values,Sample_Values
+Applicant_ID,str,29,0.87,3172,"['APP-11292', 'APP-12318', 'APP-12643']"
+Application_Date,str,12,0.36,1879,"['May 23, 2023', '2022.04.11', '21/01/2023']"
+Gender,str,219,6.6,17,"['M', 'male', 'Male']"
+Age,float64,184,5.54,61,"[37.0, 33.0, 53.0]"
+Annual_Income,str,257,7.74,2885,"['$34,326.24', '55745.85', '$76,831.14']"
+Credit_Score,float64,169,5.09,358,"[621.0, 653.0, 534.0]"
+Loan_Amount,str,198,5.96,3013,"['33921.67', '20808.57', '$28,850.86']"
+Employment_Status,str,174,5.24,16,"['Self-Employed', 'Freelancer', 'Self Employed']"
+Marital_Status,str,110,3.31,12,"['Single', 'Married', 'DIVORCED']"
+City,str,0,0.0,32,"['Phoenix', 'Chicago', 'San Antonio']"
+Loan_Approved,str,0,0.0,8,"['Y', '0', 'n']"

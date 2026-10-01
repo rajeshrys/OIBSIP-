@@ -1,0 +1,12 @@
+Feature,Before_Dtype,After_Dtype,Before_Nulls,After_Nulls,Before_Unique_Cats,After_Unique_Cats,Cleaning_Strategy
+Applicant_ID,str,str,29,0,N/A (Numeric),N/A (Numeric),String trim & ID deduplication
+Application_Date,str,datetime64[us],12,0,N/A (Numeric),N/A (Numeric),Multi-format regex date parser + ffill
+Gender,str,category,219,0,N/A (Numeric),3,Casing standardisation + Mode imputation
+Age,float64,int64,184,0,N/A (Numeric),N/A (Numeric),Biological anomaly filter + Median imputation
+Annual_Income,str,float64,257,0,N/A (Numeric),N/A (Numeric),Regex currency extraction + IQR Winsorization + Median imputation
+Credit_Score,float64,int64,169,0,N/A (Numeric),N/A (Numeric),Score range validation (300-850) + Median imputation
+Loan_Amount,str,float64,198,0,N/A (Numeric),N/A (Numeric),Regex currency extraction + IQR Winsorization + Median imputation
+Employment_Status,str,category,174,0,N/A (Numeric),4,Casing standardisation + Mode imputation
+Marital_Status,str,category,110,0,N/A (Numeric),3,Casing standardisation + Mode imputation
+City,str,category,0,0,N/A (Numeric),8,Casing standardisation + Mode imputation
+Loan_Approved,str,category,0,0,N/A (Numeric),2,Casing standardisation + Mode imputation

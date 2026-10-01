@@ -1,0 +1,7 @@
+Metric,Before_Cleaning,After_Cleaning
+Total Row Count,"3,320","3,172"
+Total Column Count,11,11
+Duplicate Rows,85 exact rows,0 (100% deduplicated)
+Total Missing / Null Values,"1,352 values",0 (100% complete)
+Data Type Integrity (Correct dtypes),36% (currency/dates stored as object),"100% (proper datetime, float, int, category)"
+"Value Range Anomalies (Age, Income, Credit)","185+ anomalies (negatives, 9999, billionaire)",0 (all bounded and validated)
